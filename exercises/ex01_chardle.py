@@ -11,21 +11,21 @@ if len(single_character) != 1:
     print("Error: Character must be a signle character.")
     exit()
 letter_instances: int = 0
-print("Searching for single character: " + single_character)
+print("Searching for " + single_character + " in " + word)
 if single_character == word[0]:
-    print(single_character + " found at index 0.")
+    print(single_character + " found at index 0")
     letter_instances: int = letter_instances + 1
 if single_character == word[1]:
-    print(single_character + " found at index 1.")  
+    print(single_character + " found at index 1")  
     letter_instances: int = letter_instances + 1
 if single_character == word[2]:
-    print(single_character + " found at index 2.")
+    print(single_character + " found at index 2")
     letter_instances: int = letter_instances + 1
 if single_character == word[3]:
-    print(single_character + " found at index 3.")
+    print(single_character + " found at index 3")
     letter_instances: int = letter_instances + 1
 if single_character == word[4]:
-    print(single_character + " found at index 4.")
+    print(single_character + " found at index 4")
     letter_instances: int = letter_instances + 1
 if letter_instances == 0:
     print("No instances of " + single_character + " found in " + word)
