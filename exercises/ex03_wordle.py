@@ -2,9 +2,9 @@
 
 __author__ = "730463283"
 
+
 # this function determines if there will be a yellow or white box
 # searches the secret word for a letter in the guessed word at an index
-
 def contains_char(searched: str, single_char: str) -> bool:
     """This function searches the secret word for a character."""
     assert len(single_char) == 1
@@ -16,14 +16,14 @@ def contains_char(searched: str, single_char: str) -> bool:
             idx += 1
     return False 
 
-# these represent the codes for the emojis
 
+# these represent the codes for the emojis
 WHITE_BOX: str = "\U00002B1C"
 GREEN_BOX: str = "\U0001F7E9"
 YELLOW_BOX: str = "\U0001F7E8"
 
-# this function assigns an emoji to the index of the word if guess is the same as, contains, or does not contain each letter
 
+# this function assigns an emoji to the index of the word if guess is the same as, contains, or does not contain each letter
 def emojified(guess: str, secret: str) -> str:
     """This function assigns emojis to each index of the guessed word."""
     assert len(guess) == len(secret)
@@ -41,8 +41,8 @@ def emojified(guess: str, secret: str) -> str:
         idx += 1
     return emoji_boxes
 
-# this function will promp the user for a guess while making sure that the length of the guess matches the legth of the secret
 
+# this function will promp the user for a guess while making sure that the length of the guess matches the legth of the secret
 def input_guess(expected_len: int) -> str:
     """Adding guess prompts."""
     choice: str = str(input(f"Enter a {expected_len} character word: "))
@@ -50,9 +50,9 @@ def input_guess(expected_len: int) -> str:
         choice = input(f"That wasn't {expected_len} chars! Try again: ")
     return choice
 
+
 # the main function that starts the game and brings everything together
 # also will keep track of turns and whether the game has been won or not
-
 def main() -> None:
     """The entrypoint of the program and main game loop."""
     turn: int = 1
@@ -69,7 +69,7 @@ def main() -> None:
     if turn > 6:
         print("X/6 - Sorry, try again tomorrow!")
 
-# this makes it possible for other modules to import the code
 
+# this makes it possible for other modules to import the code
 if __name__ == "__main__":
     main()
