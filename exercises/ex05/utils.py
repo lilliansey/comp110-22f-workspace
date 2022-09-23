@@ -2,28 +2,29 @@
 
 __author__ = "730463283"
 
+
 def only_evens(evnum: list[int]) -> list[int]:
-    "This function will return only the even values."
+    """This function will return only the even values."""
     idx: int = 0
     even_list = []
     while idx < len(evnum):
         if evnum[idx] % 2 == 0:
-            even_list.append (evnum[idx])
+            even_list.append(evnum[idx])
             idx = idx + 1
         else:
-            idx = idx+ 1
+            idx = idx + 1
     return even_list
 
 
 def concat(list1: list[int], list2: list[int]) -> list[int]:
-    "This function will put two list into one list without modifying either list."
+    """This function will put two list into one list without modifying either list."""
     concat_list = []
     concat_list = list1 + list2
     return concat_list
 
 
 def sub(subnum: list[int], start: int, end: int) -> list[int]:
-    "This function will return numbers only between the start and end index points."
+    """This function will return numbers only between the start and end index points."""
     sub_list: list[int] = []
     idx: int = 0
     if start < 0:
