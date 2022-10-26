@@ -1,10 +1,11 @@
-"""EX07 - Dictionary Functions"""
+"""EX07 - Dictionary Functions."""
 
 __author__ = "730463283"
 
+
 def invert(variables: dict[str, str]) -> dict[str, str]:
     """This function will invert the values and keys of a dictionary."""
-    final_dict: dict[str,str] = {}
+    final_dict: dict[str, str] = {}
     for key in variables:
         if variables[key] in final_dict:
             raise KeyError("Opps! You have entered duplicatr keys.")

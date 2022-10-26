@@ -1,8 +1,9 @@
-"""EX07 - Dictionary Function Tests"""
+"""EX07 - Dictionary Function Tests."""
 
 __author__ = "730463283"
 
 from dictionary import invert, favorite_color, count
+
 
 def test_invert_empty() -> None:
     """Edge case for invert."""
@@ -12,14 +13,14 @@ def test_invert_empty() -> None:
 
 def test_invert_many() -> None:
     """Use case 1 for invert."""
-    xs: dict[str, str] = {"a":"b", "l":"m", "d":"e"}
-    assert invert(xs) == {"b":"a", "m":"l", "e":"d"}
+    xs: dict[str, str] = {"a": "b", "l": "m", "d": "e"}
+    assert invert(xs) == {"b": "a", "m": "l", "e": "d"}
 
 
 def test_invert_many_again() -> None:
     """Use case 2 for invert."""
-    xs: dict[str, str] = {"ella":"lilly", "gracie":"kate", "marion":"loulie"}
-    assert invert(xs) == {"lilly":"ella", "kate":"gracie", "loulie":"marion"}
+    xs: dict[str, str] = {"ella": "lilly", "gracie": "kate", "marion": "loulie"}
+    assert invert(xs) == {"lilly": "ella", "kate": "gracie", "loulie": "marion"}
 
 
 def test_favorit_color_empty() -> None:
