@@ -44,8 +44,9 @@ class ViewController:
             self.pen.pendown()
             self.pen.color(cell.color())
             self.pen.dot(constants.CELL_RADIUS)
+            self.model.check_contacts((self.model, cell))
+    
         self.screen.update()
-
         if self.model.is_complete():
             return
         else:
