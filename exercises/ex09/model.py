@@ -26,6 +26,7 @@ class Point:
         return Point(x, y)
 
     def distance(self, other: Point) -> int:
+        """Determine the distance between two cells."""
         length: int
         length = sqrt((other.x - self.x)**2 + (other.y - self.y)**2)
         return length
@@ -36,7 +37,6 @@ class Cell:
     location: Point
     direction: Point
     sickness: int = constants.VULNERABLE
-    sickness_length: int = 0
 
     def __init__(self, location: Point, direction: Point):
         """Construct a cell with its location and direction."""
@@ -48,21 +48,16 @@ class Cell:
     # the result of adding the self object's location with its
     # direction. Hint: Look at the add method.
     def tick(self) -> None:
+        """The tick function updates the view controller for location, direction, and recovery period."""
         self.location = self.location.add(self.direction)
         if self.is_infected():
-            self.sickness_length += 1
-        
-
-
-    def color(self) -> str:
-        """Return the color representation of a cell."""
-        return "black"
-
+            self.sickness += 1
+        if self.sickness >= constants.RECOVERY_PERIOD:
+            self.immunize()
     
     def contract_disease(self) -> None:
         """Assign the Infected constant to the sickness attribute."""
         self.sickness = constants.INFECTED
-
 
     def is_vulnerable(self) -> bool:
         """Determine whether a cell is vulnerable."""
@@ -71,10 +66,9 @@ class Cell:
         else:
             return False
 
-    
     def is_infected(self) -> bool:
         """Determine whether a cell is infected."""
-        if self.sickness == constants.INFECTED and not self.is_immune() :
+        if self.sickness >= constants.INFECTED and not self.is_immune():
             return True
         else:
             return False
@@ -90,16 +84,14 @@ class Cell:
         else:
             return False
 
-
     def color(self) -> str:
         """Change the color of a cell based on its infection status."""
-        if self.sickness == constants.VULNERABLE:
+        if self.is_vulnerable():
             return "gray"
-        elif self.sickness == constants.INFECTED:
-            return "green"
-        elif self.sickness == constants.IMMUNE:
+        elif self.is_infected():
+            return "pink"
+        elif self.is_immune():
             return "blue"
-
 
     def contact_with(self, other: Cell) -> None:
         """Change the status of a cell to infected when a vulnerable cell comes in contact with an infected cell."""
@@ -119,8 +111,12 @@ class Model:
         """Initialize the cells with random locations and directions."""
         self.population = []
         normal_cells: int = cells - (num_infected + num_immune)
-        if (num_infected or num_immune) >= cells or (num_infected or num_immune) <= 0:
+        if num_infected >= cells or num_infected <= 0:
             raise ValueError("Some number of the cells must begin infected.")
+        if num_immune >= cells:
+            raise ValueError("The number of immune cells can not exceed the total number of cells. ")
+        if (num_immune + num_infected) >= cells:
+            raise ValueError("The number of immune and infected cells must not exceed the number of cells.")
         for _ in range(normal_cells):
             start_location: Point = self.random_location()
             start_direction: Point = self.random_direction(speed)
@@ -139,8 +135,6 @@ class Model:
             cell.immunize()
             self.population.append(cell)
 
-
-    
     def tick(self) -> None:
         """Update the state of the simulation by one time step."""
         self.time += 1
@@ -176,15 +170,15 @@ class Model:
             cell.location.y = constants.MIN_Y
             cell.direction.y *= -1.0
 
-
     def is_complete(self) -> bool:
         """Method to indicate when the simulation is complete."""
         for i in range(len(self.population)):
             if self.population[i].is_infected():
                 return False
+        else: 
+            return True
 
-
-    def check_contacts(self, cell: Cell) -> None:
+    def check_contacts(self) -> None:
         """Test whether any two Cell values come in constact with one another."""
         for i in range(len(self.population)):
             for j in range(i + 1, len(self.population)):
